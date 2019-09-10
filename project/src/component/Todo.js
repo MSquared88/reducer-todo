@@ -1,11 +1,43 @@
-import React from 'react'
+import React, {useReducer, useState} from 'react'
 
-function TodoItem(props) => {
+//state
+import { initialState, todoReducer } from "../reducers/todoReducer";
+
+// component
+import TodoItems from './TodoItems'
+
+function Todo() {
+	const [state, dispatch] = useReducer(todoReducer, initialState);
+	const [newTodoItem, setNewTodoItem] = useState('');
+
+	const handleChanges = e => {
+    setNewTodoItem(e.target.value);
+	};
+	
+	const submitHandler = (e) => {
+		e.preventDefault()
+		dispatch({ type: "ADD_TODO", payload: newTodoItem })
+		setNewTodoItem('')
+	}
+
+	const toggleCompleted = (todoId) => {
+		dispatch({ type: "TOGGLE_COMPLETED", payload: todoId})
+	}
   return (
-    <div>
-      <h3>{props.item}</h3>
-    </div>
+	<div>
+		{state.todos.map(todo => (
+			<TodoItems todo= {todo} toggleCompleted= {toggleCompleted}/>
+		))}
+		<form onSubmit= {submitHandler}> 
+			<input 
+			onChange={handleChanges}
+			value={newTodoItem}
+			/>
+			<button type= 'submit'>Add Todo</button>
+			<button>Remove Completed</button>
+		</form>
+	</div>			
   )
 }
 
-export default TodoItem
+export default Todo

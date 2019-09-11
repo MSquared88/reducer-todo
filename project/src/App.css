@@ -23,6 +23,20 @@
   color: #61dafb;
 }
 
+h3 {
+  margin: 0
+}
+.todo-container{
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .todo-completed {
   text-decoration: line-through;
+}
+
+.date-completed {
+  text-decoration: none ;
+  margin-left: 20px;
 }

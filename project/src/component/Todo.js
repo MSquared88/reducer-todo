@@ -22,6 +22,12 @@ function Todo() {
 
 	const toggleCompleted = (todoId) => {
 		dispatch({ type: "TOGGLE_COMPLETED", payload: todoId})
+		console.log(state)
+	}
+
+	const clearCompleted = () => {
+		dispatch({type: 'CLEAR_COMPLETED'})
+
 	}
   return (
 	<div>
@@ -34,7 +40,7 @@ function Todo() {
 			value={newTodoItem}
 			/>
 			<button type= 'submit'>Add Todo</button>
-			<button>Remove Completed</button>
+			<button onClick= {clearCompleted}>Remove Completed</button>
 		</form>
 	</div>			
   )

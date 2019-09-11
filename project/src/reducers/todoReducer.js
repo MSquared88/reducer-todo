@@ -24,17 +24,27 @@ export const todoReducer = (state, action) => {
         ]
       }
     case 'TOGGLE_COMPLETED':
-      let itemToToggle = state.todos.map(item => {
-        if(item.id === action.payload){
-          return {...item, completed: !item.completed}
-        } else{return item}
-        return itemToToggle;
-      },
-
-    default:
+      let itemToToggle = state.todos.map(todo => {
+        if(todo.id === action.payload){
+          return {
+            ...todo, completed: !todo.completed
+          }
+        } else{
+          return todo
+        }
+      })
+      return {...state, todos: [...itemToToggle]}
+      
+      case 'CLEAR_COMPLETED':
+          let clearedTodos = state.todos.filter(item => !item.completed)
+          return{
+            ...state,
+            todos: [...clearedTodos]
+          }
+          
+      
+      default:
       return state;
   }
 }
 
-
-  
